@@ -1,0 +1,36 @@
+RefDes,Name,Pattern,Value,Qty,URL
+"C1,C7,C12",CAP,CAP_1206,10uF,3,
+"C15,C16",CAP,CAP_0603,18pF,2,
+C18,CAP,CAP_0805,10uF,1,
+"C19,C21,C22,C23",CAP,CAP_0603,47nF,4,http://uk.mouser.com/ProductDetail/Vishay-Vitramon/VJ0603Y473JXJCW1BC/?qs=sGAEpiMZZMvsSlwiRhF8qsGacYjP6MDmXlDYPVmMQxo%3d
+"C2,C4,C6,C8,C10,C11,C13,C14,C17,C20,C24,C25",CAP,CAP_0603,100nF,12,
+C3,CAPAE-6.6x6.6h7.9,CAPAE-6.6x6.6h7.9,100uF,1,
+C5,CAP_1206,CAP_1206,2.2uF,1,
+"D1,D2",2N6073A,TO225F,,2,http://uk.mouser.com/ProductDetail/ON-Semiconductor/2N6073AG/?qs=sGAEpiMZZMuAO0%252bGuNbnQvyShSCAxAIBemKc8EJ5hzU%3d
+"D3, D4",Head 1,DIO_0805,LED,2,
+F1,FUSE,Fuse Holder,,1,
+"J1,J2,J3",6.49003E+11,mains connector,240VAC,3,http://uk.mouser.com/ProductDetail/Wurth-Electronics/649003013322/?qs=%2fha2pyFaduih0muUe7bw7niljY5kfOgEaXJ%252bVl75Bnde2fFvdmnu4Q%3d%3d
+,,mains header,,3,http://uk.mouser.com/ProductDetail/Wurth-Electronics/64900311122/?qs=%2fha2pyFaduhkcvDf7CO8kvo4k3%2fL4FtLOT6xfXZathI%252bpKWLrXgyLg%3d%3d
+,,mains pins,,6,http://uk.farnell.com/wurth-elektronik/64900513722dec/crimp-socket-4-2mm-16-awg/dp/2113406?MER=en-mer-0713-pd-r2-acce
+J11,1981584-1,1981584-1,USB Socket,1,
+J8,87758-08,RJ45 Socket,,1,
+L1,MPZ2012S221A,IND_0805,Choke,1,
+"Q1,Q2",2PD601ART,SOT23,,2,http://uk.mouser.com/ProductDetail/NXP-Semiconductors/2PD601ART235/?qs=sGAEpiMZZMshyDBzk1%2fWi7dklbCN21lXsjwA7yef3b4%3d
+"R1,R5",,RES_1210,1K 0.5W,2,http://uk.mouser.com/ProductDetail/KOA-Speer/SG73S2ETTD102J/?qs=sGAEpiMZZMvdGkrng054t%2f16WM9J8YovwMMaxg3UsZ0%3d
+"R10,R11,R12,R13,R15,R17,R22,R25,R27,R28,R29,R31",,RES_0603,10K 0.1%,12,http://uk.mouser.com/ProductDetail/TE-Connectivity-Neohm/CPF0603B10KE/?qs=sGAEpiMZZMvdGkrng054t8nVOZNpBC9F9vaySxrGI4c%3d
+"R14,R19,R24",,RES_0603,330R,3,
+"R2, R6",,RES_0603,210R,2,
+R26,,RES_0603,100R,1,
+R3,MCSR431K07DS,VAR-5x1.8/9x4.1,MOV,1,http://uk.farnell.com/multicomp/mcsr431k07ds/varistor-28j-275vrms/dp/1856861?ost=MCSR431K07DS
+R33,,RES_0603,120R,1,
+"R4,R7,R23,R34,R35,R36,R37",,RES_0603,10K,7,
+"R8,R16,R20,R30",,RES_0603,68K  0.1%,4,http://uk.mouser.com/ProductDetail/TE-Connectivity-Neohm/CPF0603B68KE1/?qs=sGAEpiMZZMvdGkrng054t9WFtWtrbdtGmwTBeYUuAXQ%3d
+"R9,R18,R21,R32",,RES_0603,300K 0.1%,4,http://uk.farnell.com/te-connectivity/cpf0603b300ke1/resistor-precision-300k-0-1-0603/dp/2331125
+"U1, U2",MOC3052,DIP-6,,2,http://uk.mouser.com/ProductDetail/Fairchild-Semiconductor/MOC3052M/?qs=%2fha2pyFaduiqD4KULcmw7TNF%252byRvZxJWEp7k01IIWmc%3d
+U10,SN65HVD1474,SOIC-8/150mil,RS485,1,http://uk.mouser.com/ProductDetail/Texas-Instruments/SN65HVD1474D/?qs=%2fha2pyFaduioff5HN%2fuJXUWSUO129MfmOMNuy4ZlbvVDlogGSY4z%252bg%3d%3d
+U3,TL1963A-33DCYR,SOT223-4,3.3V Reg,1,http://uk.mouser.com/ProductDetail/Texas-Instruments/TL1963A-33DCYR/?qs=%2fha2pyFadui8Go1R0rp6GtwaXobHjcgQDFskwsHg63h69lXmw%2f0pyg%3d%3d
+U4,MCP1541T,SOT23,4.096V Ref,1,
+U5,LM4132,SOT23-5,2.048V Ref,1,
+U7,OPA4330,SOIC-14/150mil,Opamp,1,
+U8,PIC24FJ128GC006,QFP-64/12x12x0.5,Microcontroller,1,http://uk.mouser.com/ProductDetail/Microchip/PIC24FJ128GC006-I-PT/?qs=%2fha2pyFadugUQ2cHmDlYcwAGAq7HM1FJ1AeEY4tP2C0S83GDM14DxQ%3d%3d
+Y1,ABM3-8.000MHZ-D2Y-T,ABM3 Crystal,8MHz,1,
