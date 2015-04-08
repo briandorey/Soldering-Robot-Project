@@ -1,0 +1,100 @@
+﻿<Window x:Class="Soldering_Robot_USB_Config.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Soldering Robot USB Config" Height="507.529" Width="1000" ResizeMode="CanResizeWithGrip" Icon="icon.ico">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" MinWidth="975" Width="Auto" Height="460">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="173*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="Auto" MinWidth="50"/>
+                <ColumnDefinition Width="Auto" MinWidth="132"/>
+                <ColumnDefinition Width="132"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btConnect" Content="Connect" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top" Width="113" Height="26" Click="btConnect_Click"/>
+            <Label Content="Head Stepper 1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Head Stepper 2" HorizontalAlignment="Left" Margin="9,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="1" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Solder Stepper 1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="2" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Solder Stepper 2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="3" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Caddy Stepper" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="4" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Soldering Iron 1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="6" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Soldering Iron 2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" Grid.Column="7" FontFamily="Segoe UI Semibold" FontSize="13"/>
+            <Label Content="Micro-stepping" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="0"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping1" Content="1" HorizontalAlignment="Left" Margin="23,79,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping1_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping2" Content="2" HorizontalAlignment="Left" Margin="23,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping2_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping4" Content="4" HorizontalAlignment="Left" Margin="23,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping4_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping8" Content="8" HorizontalAlignment="Left" Margin="23,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping8_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping16" Content="16" HorizontalAlignment="Left" Margin="23,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping16_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper1_Microstepping32" Content="32" HorizontalAlignment="Left" Margin="23,179,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper1_Microstepping" Grid.Column="0" Checked="radio_HeadStepper1_Microstepping32_Checked"/>
+            <Label Content="Current" HorizontalAlignment="Left" Margin="10,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="0"/>
+            <Label x:Name="lbl_HeadStepper1_Current" Content="120mA" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontSize="16" Grid.Column="0"/>
+            <Slider x:Name="slider_HeadStepper1_Current" HorizontalAlignment="Left" Margin="23,261,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Orientation="Vertical" Height="134" Maximum="255" SmallChange="1" TickPlacement="TopLeft" TickFrequency="10" Grid.Column="0" ValueChanged="slider_HeadStepper1_Current_ValueChanged"/>
+
+            <Label Content="Micro-stepping" HorizontalAlignment="Left" Margin="11,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="1"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping1" Content="1" HorizontalAlignment="Left" Margin="24,79,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping1_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping2" Content="2" HorizontalAlignment="Left" Margin="24,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping2_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping4" Content="4" HorizontalAlignment="Left" Margin="24,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping4_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping8" Content="8" HorizontalAlignment="Left" Margin="24,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping8_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping16" Content="16" HorizontalAlignment="Left" Margin="24,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping16_Checked"/>
+            <RadioButton x:Name="radio_HeadStepper2_Microstepping32" Content="32" HorizontalAlignment="Left" Margin="24,179,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="HeadStepper2_Microstepping" Grid.Column="1" Checked="radio_HeadStepper2_Microstepping32_Checked"/>
+            <Label Content="Current" HorizontalAlignment="Left" Margin="11,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="1"/>
+            <Label x:Name="lbl_HeadStepper2_Current" Content="120mA" HorizontalAlignment="Left" Margin="11,225,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontSize="16" Grid.Column="1"/>
+            <Slider x:Name="slider_HeadStepper2_Current" HorizontalAlignment="Left" Margin="24,261,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Orientation="Vertical" Height="134" Maximum="255" SmallChange="1" TickPlacement="TopLeft" TickFrequency="10" Grid.Column="1" ValueChanged="slider_HeadStepper2_Current_ValueChanged"/>
+
+            <Label Content="Micro-stepping" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="2"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping1" Content="1" HorizontalAlignment="Left" Margin="23,79,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping1_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping2" Content="2" HorizontalAlignment="Left" Margin="23,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping2_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping4" Content="4" HorizontalAlignment="Left" Margin="23,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping4_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping8" Content="8" HorizontalAlignment="Left" Margin="23,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping8_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping16" Content="16" HorizontalAlignment="Left" Margin="23,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping16_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper1_Microstepping32" Content="32" HorizontalAlignment="Left" Margin="23,179,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper1_Microstepping" Grid.Column="2" Checked="radio_SolderStepper1_Microstepping32_Checked"/>
+            <Label Content="Current" HorizontalAlignment="Left" Margin="10,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="2"/>
+            <Label x:Name="lbl_SolderStepper1_Current" Content="120mA" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontSize="16" Grid.Column="2"/>
+            <Slider x:Name="slider_SolderStepper1_Current" HorizontalAlignment="Left" Margin="23,261,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Orientation="Vertical" Height="134" Maximum="255" SmallChange="1" TickPlacement="TopLeft" TickFrequency="10" Grid.Column="2" ValueChanged="slider_SolderStepper1_Current_ValueChanged"/>
+
+            <Label Content="Micro-stepping" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="3"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping1" Content="1" HorizontalAlignment="Left" Margin="23,79,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping1_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping2" Content="2" HorizontalAlignment="Left" Margin="23,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping2_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping4" Content="4" HorizontalAlignment="Left" Margin="23,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping4_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping8" Content="8" HorizontalAlignment="Left" Margin="23,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping8_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping16" Content="16" HorizontalAlignment="Left" Margin="23,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping16_Checked"/>
+            <RadioButton x:Name="radio_SolderStepper2_Microstepping32" Content="32" HorizontalAlignment="Left" Margin="23,179,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="SolderStepper2_Microstepping" Grid.Column="3" Checked="radio_SolderStepper2_Microstepping32_Checked"/>
+            <Label Content="Current" HorizontalAlignment="Left" Margin="10,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="3"/>
+            <Label x:Name="lbl_SolderStepper2_Current" Content="120mA" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontSize="16" Grid.Column="3"/>
+            <Slider x:Name="slider_SolderStepper2_Current" HorizontalAlignment="Left" Margin="23,261,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Orientation="Vertical" Height="134" Maximum="255" SmallChange="1" TickPlacement="TopLeft" TickFrequency="10" Grid.Column="3" ValueChanged="slider_SolderStepper2_Current_ValueChanged"/>
+            <Label Content="Micro-stepping" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="4"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping1" Content="1" HorizontalAlignment="Left" Margin="23,79,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping1_Checked"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping2" Content="2" HorizontalAlignment="Left" Margin="23,99,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping2_Checked"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping4" Content="4" HorizontalAlignment="Left" Margin="23,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping4_Checked"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping8" Content="8" HorizontalAlignment="Left" Margin="23,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping8_Checked"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping16" Content="16" HorizontalAlignment="Left" Margin="23,159,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping16_Checked"/>
+            <RadioButton x:Name="radio_CaddyStepper_Microstepping32" Content="32" HorizontalAlignment="Left" Margin="23,179,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" GroupName="CaddyStepper_Microstepping" Grid.Column="4" Checked="radio_CaddyStepper_Microstepping32_Checked"/>
+            <Label Content="Current" HorizontalAlignment="Left" Margin="10,199,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="4"/>
+            <Label x:Name="lbl_CaddyStepper_Current" Content="120mA" HorizontalAlignment="Left" Margin="10,225,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontSize="16" Grid.Column="4"/>
+            <Slider x:Name="slider_CaddyStepper_Current" HorizontalAlignment="Left" Margin="23,261,0,0" Grid.Row="1" VerticalAlignment="Top" Width="35" Orientation="Vertical" Height="134" Maximum="255" SmallChange="1" TickPlacement="TopLeft" TickFrequency="10" Grid.Column="4" ValueChanged="slider_CaddyStepper_Current_ValueChanged"/>
+            <Label Content="Temperature" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="6" Height="26"/>
+            <Label x:Name="lbl_iron1_currenttemperature" Content="230°C" HorizontalAlignment="Left" Margin="9,74,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="6" Height="40" FontSize="18"/>
+            <Label Content="Target" HorizontalAlignment="Left" Margin="9,116,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="6" Height="26"/>
+            <TextBox x:Name="txt_iron1_targettemperature" Grid.Column="6" HorizontalAlignment="Left" Height="27" Margin="12,147,0,0" Grid.Row="1" TextWrapping="Wrap" Text="270" VerticalAlignment="Top" Width="110" FontSize="16"/>
+            <Button x:Name="bt_iron2_save" Content="Save" Grid.Column="7" HorizontalAlignment="Left" Margin="29,188,0,0" Grid.Row="1" VerticalAlignment="Top" Width="77" Height="28" FontSize="14" FontFamily="Segoe UI Semibold" Click="bt_iron2_save_Click"/>
+            <Label Content="Temperature" HorizontalAlignment="Left" Margin="10,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="7" Height="26"/>
+            <Label x:Name="lbl_iron2_currenttemperature" Content="230°C" HorizontalAlignment="Left" Margin="9,74,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="7" Height="40" FontSize="18"/>
+            <Label Content="Target" HorizontalAlignment="Left" Margin="9,116,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="7" Height="26"/>
+            <TextBox x:Name="txt_iron2_targettemperature" Grid.Column="7" HorizontalAlignment="Left" Height="27" Margin="12,147,0,0" Grid.Row="1" TextWrapping="Wrap" Text="270" VerticalAlignment="Top" Width="110" FontSize="16"/>
+            <Label x:Name="lblStatus" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="11,6,0,0" VerticalAlignment="Top" Width="508" Grid.ColumnSpan="4"/>
+            <Button x:Name="bt_iron1_save" Content="Save" Grid.Column="6" HorizontalAlignment="Left" Margin="27,188,0,0" Grid.Row="1" VerticalAlignment="Top" Width="78" Height="28" FontSize="14" FontFamily="Segoe UI Semibold" Click="bt_iron1_save_Click"/>
+            <Label x:Name="lbl_iron1_status" Content="On" HorizontalAlignment="Left" Margin="9,232,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="6" Height="40" FontSize="18"/>
+            <Label x:Name="lbl_iron2_status" Content="On" HorizontalAlignment="Left" Margin="10,232,0,0" Grid.Row="1" VerticalAlignment="Top" Width="113" FontFamily="Segoe UI Semibold" Grid.Column="7" Height="40" FontSize="18"/>
+            <CheckBox x:Name="cb_solderingiron1active" Content="Active" Grid.Column="6" HorizontalAlignment="Left" Margin="12,277,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="110" FontSize="14" Click="cb_solderingiron1active_Checked"/>
+            <CheckBox x:Name="cb_solderingiron2active" Content="Active" Grid.Column="7" HorizontalAlignment="Left" Margin="12,277,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="110" FontSize="14" Click="cb_solderingiron2active_Checked"/>
+        </Grid>
+
+    </Grid>
+</Window>

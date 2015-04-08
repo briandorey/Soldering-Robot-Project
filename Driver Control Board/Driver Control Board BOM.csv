@@ -1,0 +1,54 @@
+RefDes,Name,Pattern,Value,Qty,
+"C1,C2,C3,C33,C34",CAP,CAP_0603,100nF,5,
+"C11,C22-C27,C29,C30,C45-C59,C61",CAP,CAP_0402,100nF,25,http://uk.mouser.com/ProductDetail/Murata-Electronics/GRM155R71E104KE14D/?qs=sGAEpiMZZMvsSlwiRhF8qg4BYYxG44hr5B2MrPlf%252bUw0Fd4UIWBlyg%3d%3d
+"C12, C17, C19",CAP,CAP_1210,2.2uF,3,
+C13,POLCAP,CAPAE-6.6x6.6h5.4,47uF,1,
+C16,CAP,CAP_0805,22uF,1,http://uk.mouser.com/ProductDetail/Murata-Electronics/GRM219R61C226ME15L/?qs=sGAEpiMZZMvsSlwiRhF8qtKev7nvVKumljPF%2fWIWUYWmCt5x%252baDxog%3d%3d
+C18,CAP,CAP_0603,30pF,1,http://uk.mouser.com/ProductDetail/Murata-Electronics/GRM1885C1H300JA01D/?qs=sGAEpiMZZMvsSlwiRhF8qiAl%252bCgQrCdeGMEXQ33Mr0U%3d
+C20,CAP,CAP_0805,910pF,1,http://uk.mouser.com/ProductDetail/Murata-Electronics/GRM2165C1H911JA01D/?qs=sGAEpiMZZMvsSlwiRhF8qkVDlJT42SBGbBPIRyNRHTI%3d
+C28,CAP,CAP_1206,10uF,1,
+"C31,C32",CAP,CAP_0603,18pF,2,
+"C35-C39,C14,C15",CAP,CAP_0603,10nF,7,
+C40-C44,CAP,CAP_0603,470nF,5,http://uk.mouser.com/ProductDetail/Taiyo-Yuden/TMK107B7474KA-TR/?qs=sGAEpiMZZMvsSlwiRhF8qgJCQaFFkNE%2fQGmKC2CpyhI%3d
+"C9,C10",POLCAP,CAPPR-5/12.5h20,1000uF,2,
+D1,PDS760-13,PDS760-13,,1,http://uk.mouser.com/ProductDetail/Diodes-Incorporated/PDS760-13/?qs=%2fha2pyFadujDMQRer%252bptjLg%2f3472gLJqh1lbD36Uy1c%3d
+D2,TZ,SOD-123F,570.0 mV,1,http://uk.farnell.com/nxp/pmeg6010ceh/diode-schottky-1a-60v-sod-123f/dp/1510694?ost=PMEG6010CEH%2C115
+"D5,D6",Status,DIO_0805,LEDs,2,
+J1,64900211122,24V connector,24V In,1,
+"J18,J6,J7,J9,J13",22-27-2031,22-27-2031,Carriage,5,http://uk.farnell.com/molex/22-27-2031/header-square-pin-2-54mm-3way/dp/9731156?ost=22-27-2031
+,,,,,http://uk.farnell.com/molex/22-01-2035/crimp-housing-2-54mm-3way/dp/143127?MER=en-mer-0713-pd-r2-acce
+,,,,,
+J2,22-27-2021 ,22-27-2021,,1,http://uk.farnell.com/molex/22-27-2021/header-square-pin-2-54mm-2way/dp/9731148?MER=baynote-9731148-pr
+,,,,,http://uk.farnell.com/molex/22-01-2025/crimp-housing-2-54mm-2way/dp/143126?MER=en-mer-0713-pd-r2-acce
+J30,1981584-1,1981584-1,USB Socket,1,
+"J44-J48, J33",644456-4,22-27-2041,,6,http://uk.farnell.com/molex/22-27-2041/header-square-pin-2-54mm-4way/dp/9731164
+,,,,,http://uk.farnell.com/molex/22-01-2045/crimp-housing-2-54mm-4way/dp/143128?MER=en-mer-0713-pd-r2-acce
+J8,87758-08,RJ45 Socket,,1,
+L1,SDR1307-5R6ML,SDR1307-5R6ML,5.6uH,1,http://uk.farnell.com/bourns/sdr1307-5r6ml/inductor-5-6uh-20-6-5a-smd/dp/2329035RL
+L2,MPI4040R1-R15-R,MPI4040R1-R15-R,150nH,1,http://uk.farnell.com/coiltronics/mpi4040r1-r15-r/inductor-power-0-15uh-7a/dp/2145269RL
+L3,SDR0604-470KL,SDR0604-470KL,47uH,1,http://uk.mouser.com/ProductDetail/Bourns/SDR0604-470KL/?qs=%2fha2pyFadujik2URTw3rQkMGQODTVkKu9fjt85ewjZBzuYj%252buGXuvw%3d%3d
+L4,NLCV32T-R10M-PFR,NLCV32T-R10M-PFR,100nH,1,http://uk.mouser.com/ProductDetail/TDK/NLCV32T-R10M-PFR/?qs=%2fha2pyFaduj0yBTak%2fsl%2fcHPhPKVK8MRpEC9uN1KU2RLvFcGtNMp2A%3d%3d
+L5,MPZ2012S221A,IND_0805,,1,
+R1,RES,RES_0603,53.6K,1,
+"R11,R17,R18",RES,RES_0603,10K,3,
+"R15,R16",RES,RES_0603,330R,2,
+R19-R23,RES,RES_0402,1M,5,http://uk.mouser.com/ProductDetail/Vishay-Dale/CRCW04021M00FKED/?qs=sGAEpiMZZMtlubZbdhIBIP1kQfp6uFKNqa3%2faO2ZUtI%3d
+R2,RES,RES_0603,28K,1,http://uk.mouser.com/ProductDetail/Panasonic/ERJ-3EKF2802V/?qs=sGAEpiMZZMtlubZbdhIBILWcrV%252bWBYJC9Ycl4DzkEL0%3d
+R3,RES,RES_0603,19.6K,1,
+R33,,RES_0603,120R,1,
+R34-R43,ERJB1BFR62U,RES_2010,620mR,10,http://uk.farnell.com/vishay-dale/rcwe2010r620fkea/resistor-2010-0r62-1/dp/1838693
+R4,RES_0603,RES_0603,182K,1,
+R5,RES,RES_0603,10.2K,1,
+R6,RES_0603,RES_0603,8.45K,1,
+U1,TPS54540,SOIC-8EP/150mil,,1,
+U10,SN65HVD1474,SOIC-8/150mil,,1,http://uk.mouser.com/ProductDetail/Texas-Instruments/SN65HVD1474D/?qs=%2fha2pyFaduioff5HN%2fuJXUWSUO129MfmOMNuy4ZlbvVDlogGSY4z%252bg%3d%3d
+U11,KFLOP JP5,HDR-2x4T/2.54x2.54/10x5,,1,
+U13,SN74AUP1G17,SOT23-5,,1,http://uk.farnell.com/texas-instruments/sn74aup1g17dbvr/ic-schmitt-trigger-buffer-sot/dp/2342381
+U15,HC05 Bluetooth,HC05 Bluetooth,,1,
+U16,KFLOP JP7,HDR-2x13T/2.54x2.54/33x5,,1,
+"U17,U18",MCP4461,TSSOP-20,,2,http://uk.farnell.com/microchip/mcp4461-103e-st/dgtl-pot-257taps-10k-20tssop/dp/1863949?ost=MCP4461-103E%2FST
+U19-U23,DRV8825,TSSOP28/5.6x0.65,,5,
+U2,LMR16006XDDC,SOT23-6,,1,
+U7,SN74AHC14PWLE,TSSOP-14,,1,http://uk.farnell.com/texas-instruments/sn74ac14pwr/ic-hex-inverter-schmitt-trigger/dp/2342460
+U9,PIC32MX795F512L-80I/PF,QFP-100/16x16x0.5,,1,
+Y1,ABM3-8.000MHZ-D2Y-T,ABM3 Crystal,8MHz,1,

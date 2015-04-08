@@ -1,0 +1,14 @@
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Release\Soldering Robot USB Config.exe.config
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Release\Soldering Robot USB Config.exe
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Release\Soldering Robot USB Config.pdb
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Release\usbGenericHidCommunications.dll
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config.csprojResolveAssemblyReference.cache
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\MainWindow.baml
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\MainWindow.g.cs
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\App.g.cs
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config_MarkupCompile.cache
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config.g.resources
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering_Robot_USB_Config.Properties.Resources.resources
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config.csproj.GenerateResource.Cache
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config.exe
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Release\Soldering Robot USB Config.pdb
