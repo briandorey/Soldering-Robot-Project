@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +25,18 @@ namespace Soldering_Robot_USB_Config
         // Create an instance of the USB reference device
         private usbDevice usbController;
 
+        private SolderingStationObject solderingControllerStatus = new SolderingStationObject();
+
+        System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+
+
         private bool ConfigLoaded = false;
 
         public MainWindow()
         {
             InitializeComponent();
-
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             // Create the USB reference device object (passing VID and PID)
             usbController = new usbDevice(0x04D8, 0x0045);
 
@@ -38,7 +45,7 @@ namespace Soldering_Robot_USB_Config
 
             // Perform an initial search for the target device
             usbController.findTargetDevice();
-        }        
+        }
 
         private void usbEvent_receiver(object o, EventArgs e)
         {
@@ -63,6 +70,8 @@ namespace Soldering_Robot_USB_Config
         private void getCurrentConfig()
         {
             // get the micro-stepping modes from the controller
+
+
 
             byte headstepper1microsteppingmode = usbController.getHeadStepper1MicrosteppingMode();
             byte headstepper2microsteppingmode = usbController.getHeadStepper2MicrosteppingMode();
@@ -220,37 +229,33 @@ namespace Soldering_Robot_USB_Config
 
             // get the soldering iron status
 
-            double solderingiron1temperature = usbController.getSolderingIron1Temperature();
-            lbl_iron1_currenttemperature.Content = solderingiron1temperature.ToString("0.00°C");
-            
-            double solderingiron2temperature = usbController.getSolderingIron2Temperature();
-            lbl_iron2_currenttemperature.Content = solderingiron2temperature.ToString("0.00°C");
-            
-            double solderingiron1targettemperature = usbController.getSolderingIron1TargetTemperature();
-            txt_iron1_targettemperature.Text = solderingiron1targettemperature.ToString("0.00");
+            solderingControllerStatus = usbController.getSolderingGlobalStatus();
 
-            Double solderingiron2targettemperature = usbController.getSolderingIron2TargetTemperature();                  
-            txt_iron2_targettemperature.Text = solderingiron2targettemperature.ToString("0.00");
-            
-            bool solderingiron1status = usbController.getSolderingIron1Status();
-            bool solderingiron2status = usbController.getSolderingIron2Status();            
+            lbl_iron1_currenttemperature.Content = solderingControllerStatus.Iron1_Temperature.ToString("0.00°C");
+
+            lbl_iron2_currenttemperature.Content = solderingControllerStatus.Iron2_Temperature.ToString("0.00°C");
+
+            txt_iron1_targettemperature.Text = solderingControllerStatus.Iron1_Target_Temperature.ToString("0.00");
+
+            txt_iron2_targettemperature.Text = solderingControllerStatus.Iron2_Target_Temperature.ToString("0.00");
+
+            bool solderingiron1status = solderingControllerStatus.Iron1_Running;
+            bool solderingiron2status = solderingControllerStatus.Iron2_Running;
 
             if (solderingiron1status) { lbl_iron1_status.Content = "Heating"; } else { lbl_iron1_status.Content = "Off"; }
 
             if (solderingiron2status) { lbl_iron2_status.Content = "Heating"; } else { lbl_iron2_status.Content = "Off"; }
 
-            bool solderingiron1activation = usbController.getSolderingIron1ActivationStatus();
-            bool solderingiron2activation = usbController.getSolderingIron2ActivationStatus();
+            bool solderingiron1activation = solderingControllerStatus.Iron1_Activate;
+            bool solderingiron2activation = solderingControllerStatus.Iron2_Activate;
 
             if (solderingiron1activation) { cb_solderingiron1active.IsChecked = true; } else { cb_solderingiron1active.IsChecked = false; }
             if (solderingiron2activation) { cb_solderingiron2active.IsChecked = true; } else { cb_solderingiron2active.IsChecked = false; }
-            
+
             ConfigLoaded = true;
 
             // start the timer to update the temperatures
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0,0,1);
+
             dispatcherTimer.Start();
         }
 
@@ -258,240 +263,323 @@ namespace Soldering_Robot_USB_Config
         {
             // get the temperatures from the soldering irons and display it on the screen
 
-            double solderingiron1temperature = usbController.getSolderingIron1Temperature();
-            lbl_iron1_currenttemperature.Content = solderingiron1temperature.ToString("0.00°C");
+            solderingControllerStatus = usbController.getSolderingGlobalStatus();
 
-            double solderingiron2temperature = usbController.getSolderingIron2Temperature();
-            lbl_iron2_currenttemperature.Content = solderingiron2temperature.ToString("0.00°C");
+            lbl_iron1_currenttemperature.Content = solderingControllerStatus.Iron1_Temperature.ToString("0.00°C");
 
-            bool solderingiron1status = usbController.getSolderingIron1Status();
-            bool solderingiron2status = usbController.getSolderingIron2Status();
+            lbl_iron2_currenttemperature.Content = solderingControllerStatus.Iron2_Temperature.ToString("0.00°C");
+
+            bool solderingiron1status = solderingControllerStatus.Iron1_Running;
+            bool solderingiron2status = solderingControllerStatus.Iron2_Running;
 
             if (solderingiron1status) { lbl_iron1_status.Content = "Heating"; } else { lbl_iron1_status.Content = "Off"; }
 
             if (solderingiron2status) { lbl_iron2_status.Content = "Heating"; } else { lbl_iron2_status.Content = "Off"; }
+
+            string log = "";
+            if (solderingControllerStatus.success) { log += "Success:"; } else { log += "Failed:"; }
+            if (solderingControllerStatus.Iron1_Running) { log += "Iron1=On,"; } else { log += "Iron1=Off,"; }
+            if (solderingControllerStatus.Iron2_Running) { log += "Iron2=On,"; } else { log += "Iron2=Off,"; }
+            log += solderingControllerStatus.Iron1_Temperature.ToString("0.00°C,");
+            log += solderingControllerStatus.Iron2_Temperature.ToString("0.00°C,");
+            log += solderingControllerStatus.Iron1_Target_Temperature.ToString("0.00°C,");
+            log += solderingControllerStatus.Iron2_Target_Temperature.ToString("0.00°C");
+
+            using (System.IO.StreamWriter w = File.AppendText("d:\\solderlog.txt"))
+            {
+                w.WriteLine(log);
+            }
         }
 
         private void btConnect_Click(object sender, RoutedEventArgs e)
         {
             // search for the USB device and connect if available
-
+            dispatcherTimer.IsEnabled = false;
             usbController.findTargetDevice();
             if (usbController.getDeviceStatus())
             {
                 this.lblStatus.Content = "Connected";
+                
             }
             else
             {
                 this.lblStatus.Content = "Connection Failed";
             }
+            dispatcherTimer.IsEnabled = true;
         }
 
         // set the micro-stepping modes and current levels
 
         private void radio_HeadStepper1_Microstepping1_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) {  usbController.setHeadStepper1MicrosteppingMode(0x01);  }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x01); dispatcherTimer.IsEnabled = true;
+            }
+
         }
 
         private void radio_HeadStepper1_Microstepping2_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) {  usbController.setHeadStepper1MicrosteppingMode(0x02);  }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x02); dispatcherTimer.IsEnabled = true;
+            }
         }
 
         private void radio_HeadStepper1_Microstepping4_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) {  usbController.setHeadStepper1MicrosteppingMode(0x04);  }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x04); dispatcherTimer.IsEnabled = true;
+            }
         }
 
         private void radio_HeadStepper1_Microstepping8_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded)  {  usbController.setHeadStepper1MicrosteppingMode(0x08); }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x08); dispatcherTimer.IsEnabled = true;
+            }
         }
 
         private void radio_HeadStepper1_Microstepping16_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded)  {  usbController.setHeadStepper1MicrosteppingMode(0x16); }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x16); dispatcherTimer.IsEnabled = true;
+            }
         }
 
         private void radio_HeadStepper1_Microstepping32_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded)  {  usbController.setHeadStepper1MicrosteppingMode(0x32); }
+            if (ConfigLoaded)
+            {
+                dispatcherTimer.IsEnabled = false;
+                usbController.setHeadStepper1MicrosteppingMode(0x32); dispatcherTimer.IsEnabled = true;
+            }
         }
 
         private void slider_HeadStepper1_Current_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ConfigLoaded)
             {
+                dispatcherTimer.IsEnabled = false;
                 byte newvalue = System.Convert.ToByte(slider_HeadStepper1_Current.Value);
                 usbController.setHeadStepper1Current(newvalue);
 
                 lbl_HeadStepper1_Current.Content = calculateCurrent_mA(newvalue).ToString("0.00 A");
+
+                dispatcherTimer.IsEnabled = true;
             }
         }
-       
+
 
         private void radio_HeadStepper2_Microstepping1_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x01); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x01); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_HeadStepper2_Microstepping2_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x02); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x02); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_HeadStepper2_Microstepping4_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x04); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x04); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_HeadStepper2_Microstepping8_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x08); }
+           
+            if (ConfigLoaded) { dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x08); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_HeadStepper2_Microstepping16_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x16); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x16); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_HeadStepper2_Microstepping32_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setHeadStepper2MicrosteppingMode(0x32); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setHeadStepper2MicrosteppingMode(0x32); dispatcherTimer.IsEnabled = true; }
         }
 
         private void slider_HeadStepper2_Current_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ConfigLoaded)
             {
+                dispatcherTimer.IsEnabled = false;
                 byte newvalue = System.Convert.ToByte(slider_HeadStepper2_Current.Value);
                 usbController.setHeadStepper2Current(newvalue);
 
                 lbl_HeadStepper2_Current.Content = calculateCurrent_mA(newvalue).ToString("0.00 A");
+
+                dispatcherTimer.IsEnabled = true;
             }
         }
 
         private void radio_SolderStepper1_Microstepping1_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x01); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x01); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper1_Microstepping2_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x02); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x02); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper1_Microstepping4_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x04); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x04); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper1_Microstepping8_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x08); }
+            if (ConfigLoaded) { dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x08); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper1_Microstepping16_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x16); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x16); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper1_Microstepping32_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper1MicrosteppingMode(0x32); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper1MicrosteppingMode(0x32); dispatcherTimer.IsEnabled = true; }
         }
 
         private void slider_SolderStepper1_Current_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ConfigLoaded)
             {
+                dispatcherTimer.IsEnabled = false;
                 byte newvalue = System.Convert.ToByte(slider_SolderStepper1_Current.Value);
                 usbController.setSolderStepper1Current(newvalue);
 
                 lbl_SolderStepper1_Current.Content = calculateCurrent_mA(newvalue).ToString("0.00 A");
+
+                dispatcherTimer.IsEnabled = true;
             }
         }
 
         private void radio_SolderStepper2_Microstepping1_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x01); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x01); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper2_Microstepping2_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x02); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x02); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper2_Microstepping4_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x04); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x04); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper2_Microstepping8_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x08); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x08); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper2_Microstepping16_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x16); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x16); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_SolderStepper2_Microstepping32_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setSolderStepper2MicrosteppingMode(0x32); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setSolderStepper2MicrosteppingMode(0x32); dispatcherTimer.IsEnabled = true; }
         }
 
         private void slider_SolderStepper2_Current_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ConfigLoaded)
             {
+                dispatcherTimer.IsEnabled = false;
                 byte newvalue = System.Convert.ToByte(slider_SolderStepper2_Current.Value);
                 usbController.setSolderStepper2Current(newvalue);
 
                 lbl_SolderStepper2_Current.Content = calculateCurrent_mA(newvalue).ToString("0.00 A");
+
+                dispatcherTimer.IsEnabled = true;
             }
         }
 
         private void radio_CaddyStepper_Microstepping1_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x01); }
+            
+            if (ConfigLoaded) { 
+                dispatcherTimer.IsEnabled = false;
+                usbController.setCaddyStepperMicrosteppingMode(0x01); 
+                dispatcherTimer.IsEnabled = true; 
+            }
         }
 
         private void radio_CaddyStepper_Microstepping2_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x02); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setCaddyStepperMicrosteppingMode(0x02); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_CaddyStepper_Microstepping4_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x04); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setCaddyStepperMicrosteppingMode(0x04); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_CaddyStepper_Microstepping8_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x08); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setCaddyStepperMicrosteppingMode(0x08); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_CaddyStepper_Microstepping16_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x16); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setCaddyStepperMicrosteppingMode(0x16); dispatcherTimer.IsEnabled = true; }
         }
 
         private void radio_CaddyStepper_Microstepping32_Checked(object sender, RoutedEventArgs e)
         {
-            if (ConfigLoaded) { usbController.setCaddyStepperMicrosteppingMode(0x32); }
+            
+            if (ConfigLoaded) {dispatcherTimer.IsEnabled = false; usbController.setCaddyStepperMicrosteppingMode(0x32); dispatcherTimer.IsEnabled = true; }
         }
 
         private void slider_CaddyStepper_Current_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (ConfigLoaded)
             {
+                dispatcherTimer.IsEnabled = false;
                 byte newvalue = System.Convert.ToByte(slider_CaddyStepper_Current.Value);
                 usbController.setCaddyStepperCurrent(newvalue);
 
                 lbl_CaddyStepper_Current.Content = calculateCurrent_mA(newvalue).ToString("0.00 A");
+
+                dispatcherTimer.IsEnabled = true;
             }
         }
 
@@ -511,29 +599,41 @@ namespace Soldering_Robot_USB_Config
 
         private void bt_iron1_save_Click(object sender, RoutedEventArgs e)
         {
+            dispatcherTimer.IsEnabled = false;
             usbController.setSolderingIron1TargetTemperature(double.Parse(txt_iron1_targettemperature.Text));
+
+            dispatcherTimer.IsEnabled = true;
         }
 
         private void bt_iron2_save_Click(object sender, RoutedEventArgs e)
         {
-            usbController.setSolderingIron2TargetTemperature(double.Parse(txt_iron2_targettemperature.Text));
+            dispatcherTimer.IsEnabled = false;
+            usbController.setSolderingIron2TargetTemperature(double.Parse(txt_iron2_targettemperature.Text)); 
+            dispatcherTimer.IsEnabled = true;
         }
 
         // set the active status for the soldering irons
 
         private void cb_solderingiron1active_Checked(object sender, RoutedEventArgs e)
         {
-            if (cb_solderingiron1active.IsChecked == true) { 
-                usbController.setSolderingIron1Status(true); 
+            dispatcherTimer.IsEnabled = false;
+
+            if (cb_solderingiron1active.IsChecked == true)
+            {
+                usbController.setSolderingIron1Status(true);
             }
             else
             {
-                usbController.setSolderingIron1Status(false); 
+                usbController.setSolderingIron1Status(false);
             }
+
+            dispatcherTimer.IsEnabled = true;
         }
 
         private void cb_solderingiron2active_Checked(object sender, RoutedEventArgs e)
         {
+            dispatcherTimer.IsEnabled = false;
+
             if (cb_solderingiron2active.IsChecked == true)
             {
                 usbController.setSolderingIron2Status(true);
@@ -542,6 +642,8 @@ namespace Soldering_Robot_USB_Config
             {
                 usbController.setSolderingIron2Status(false);
             }
+
+            dispatcherTimer.IsEnabled = true;
         }
     }
 }

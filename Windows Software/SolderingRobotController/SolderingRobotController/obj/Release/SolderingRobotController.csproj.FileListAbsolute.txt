@@ -1,0 +1,16 @@
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\MainWindow.baml
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\App.baml
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\MainWindow.g.cs
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\App.g.cs
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController_Content.g.cs
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController_MarkupCompile.cache
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.g.resources
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.Properties.Resources.resources
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.csproj.GenerateResource.Cache
+\\WIN-TABLET\KMotion432\KMotion\Release\InitSolderingRobot.c
+\\WIN-TABLET\KMotion432\KMotion\Release\SolderingRobotController.exe.config
+\\WIN-TABLET\KMotion432\KMotion\Release\SolderingRobotController.exe
+\\WIN-TABLET\KMotion432\KMotion\Release\SolderingRobotController.pdb
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.exe
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.pdb
+E:\Documents\VisualStudioPNP\SolderingRobotController\SolderingRobotController\obj\Release\SolderingRobotController.csprojResolveAssemblyReference.cache

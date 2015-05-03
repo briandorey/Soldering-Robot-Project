@@ -1,7 +1,7 @@
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\Soldering Robot USB Config.exe.config
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\Soldering Robot USB Config.exe
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\Soldering Robot USB Config.pdb
-D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.csprojResolveAssemblyReference.cache
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\usbGenericHidCommunications.dll
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\MainWindow.baml
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\MainWindow.g.cs
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\App.g.cs
@@ -11,4 +11,7 @@ D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Confi
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.csproj.GenerateResource.Cache
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.exe
 D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.pdb
-D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\usbGenericHidCommunications.dll
+D:\Soldering Robot\Software\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.csprojResolveAssemblyReference.cache
+E:\Soldering Robot USB Config\Soldering Robot USB Config\bin\Debug\Soldering Robot USB Config.exe.config
+E:\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.exe
+E:\Soldering Robot USB Config\Soldering Robot USB Config\obj\Debug\Soldering Robot USB Config.pdb

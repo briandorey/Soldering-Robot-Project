@@ -16,17 +16,18 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 namespace Soldering_Robot_USB_Config
-    {
-    
+{
+
 
     /// <summary>
     /// This class contains all of the necessary functions for
     /// communicating with the soldering robot driver control board
     /// </summary>
     class usbDevice : usbGenericHidCommunication
-        {
+    {
 
-        public usbDevice(int vid, int pid) : base(vid, pid)
+        public usbDevice(int vid, int pid)
+            : base(vid, pid)
         {
         }
 
@@ -123,7 +124,7 @@ namespace Soldering_Robot_USB_Config
                 return 0;
             }
 
-        } 
+        }
         #endregion
 
         #region Head Stepper 2 Methods
@@ -203,7 +204,7 @@ namespace Soldering_Robot_USB_Config
                 return 0;
             }
 
-        } 
+        }
         #endregion
 
         #region Solder Stepper 1 Methods
@@ -284,7 +285,7 @@ namespace Soldering_Robot_USB_Config
                 return 0;
             }
 
-        } 
+        }
         #endregion
 
         #region Solder Stepper 2 Methods
@@ -500,36 +501,44 @@ namespace Soldering_Robot_USB_Config
 
         public double getSolderingIron1Temperature() // gets whether the soldering iron 1 element is switched on
         {
-            Byte[] outputBuffer = new Byte[65];
-            Byte[] inputBuffer = new Byte[65];
-            Byte[] doubleBuffer = new Byte[6];
-
-            outputBuffer[0] = 0;
-            outputBuffer[1] = 0x03;
-            outputBuffer[2] = 0x03;
-
-            bool success;
-            success = writeRawReportToDevice(outputBuffer);
-
-            if (success)
+            try
             {
-                // Perform the read
-                success = readSingleReportFromDevice(ref inputBuffer);
-                doubleBuffer[0] = inputBuffer[1];
-                doubleBuffer[1] = inputBuffer[2];
-                doubleBuffer[2] = inputBuffer[3];
-                doubleBuffer[3] = inputBuffer[4];
-                doubleBuffer[4] = inputBuffer[5];
-                doubleBuffer[5] = inputBuffer[6];
-                string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
-                try {
-                    double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+                Byte[] outputBuffer = new Byte[65];
+                Byte[] inputBuffer = new Byte[65];
+                Byte[] doubleBuffer = new Byte[6];
 
-                return f;
-                     }
-                catch { Debug.WriteLine(s); return 0; }
+                outputBuffer[0] = 0;
+                outputBuffer[1] = 0x03;
+                outputBuffer[2] = 0x03;
+
+                bool success;
+                success = writeRawReportToDevice(outputBuffer);
+
+                if (success)
+                {
+                    // Perform the read
+                    success = readSingleReportFromDevice(ref inputBuffer);
+                    doubleBuffer[0] = inputBuffer[1];
+                    doubleBuffer[1] = inputBuffer[2];
+                    doubleBuffer[2] = inputBuffer[3];
+                    doubleBuffer[3] = inputBuffer[4];
+                    doubleBuffer[4] = inputBuffer[5];
+                    doubleBuffer[5] = inputBuffer[6];
+                    string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
+                    try
+                    {
+                        double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        return f;
+                    }
+                    catch { Debug.WriteLine(s); return 0; }
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            else
+            catch
             {
                 return 0;
             }
@@ -538,36 +547,42 @@ namespace Soldering_Robot_USB_Config
 
         public double getSolderingIron1TargetTemperature() // gets whether the soldering iron 1 element is switched on
         {
-            Byte[] outputBuffer = new Byte[65];
-            Byte[] inputBuffer = new Byte[65];
-            Byte[] doubleBuffer = new Byte[6];
-
-            outputBuffer[0] = 0;
-            outputBuffer[1] = 0x03;
-            outputBuffer[2] = 0x04;
-
-            bool success;
-            success = writeRawReportToDevice(outputBuffer);
-
-            if (success)
+            try
             {
-                // Perform the read
-                success = readSingleReportFromDevice(ref inputBuffer);
-                doubleBuffer[0] = inputBuffer[1];
-                doubleBuffer[1] = inputBuffer[2];
-                doubleBuffer[2] = inputBuffer[3];
-                doubleBuffer[3] = inputBuffer[4];
-                doubleBuffer[4] = inputBuffer[5];
-                doubleBuffer[5] = inputBuffer[6];
-                string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
-                double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-                return f;
+                Byte[] outputBuffer = new Byte[65];
+                Byte[] inputBuffer = new Byte[65];
+                Byte[] doubleBuffer = new Byte[6];
+
+                outputBuffer[0] = 0;
+                outputBuffer[1] = 0x03;
+                outputBuffer[2] = 0x04;
+
+                bool success;
+                success = writeRawReportToDevice(outputBuffer);
+
+                if (success)
+                {
+                    // Perform the read
+                    success = readSingleReportFromDevice(ref inputBuffer);
+                    doubleBuffer[0] = inputBuffer[1];
+                    doubleBuffer[1] = inputBuffer[2];
+                    doubleBuffer[2] = inputBuffer[3];
+                    doubleBuffer[3] = inputBuffer[4];
+                    doubleBuffer[4] = inputBuffer[5];
+                    doubleBuffer[5] = inputBuffer[6];
+                    string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
+                    double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+                    return f;
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            else
+            catch
             {
                 return 0;
             }
-
         }
 
         public bool setSolderingIron1TargetTemperature(double inval) // sets whether or not soldering iron 1 is switched on
@@ -629,8 +644,9 @@ namespace Soldering_Robot_USB_Config
             {
                 outputBuffer[3] = 1;
             }
-            else { 
-                outputBuffer[3] = 0; 
+            else
+            {
+                outputBuffer[3] = 0;
             }
 
             bool success;
@@ -654,13 +670,13 @@ namespace Soldering_Robot_USB_Config
             {
                 // Perform the read
                 success = readSingleReportFromDevice(ref inputBuffer);
-                if (inputBuffer[1] == 1) 
-                { 
-                    return true; 
-                } 
-                else 
-                { 
-                    return false; 
+                if (inputBuffer[1] == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
@@ -672,37 +688,44 @@ namespace Soldering_Robot_USB_Config
 
         public double getSolderingIron2Temperature() // gets whether the soldering iron 1 element is switched on
         {
-            Byte[] outputBuffer = new Byte[65];
-            Byte[] inputBuffer = new Byte[65];
-            Byte[] doubleBuffer = new Byte[6];
-
-            outputBuffer[0] = 0;
-            outputBuffer[1] = 0x03;
-            outputBuffer[2] = 0x13;
-
-            bool success;
-            success = writeRawReportToDevice(outputBuffer);
-
-            if (success)
+            try
             {
-                // Perform the read
-                success = readSingleReportFromDevice(ref inputBuffer);
-                doubleBuffer[0] = inputBuffer[1];
-                doubleBuffer[1] = inputBuffer[2];
-                doubleBuffer[2] = inputBuffer[3];
-                doubleBuffer[3] = inputBuffer[4];
-                doubleBuffer[4] = inputBuffer[5];
-                doubleBuffer[5] = inputBuffer[6];
-                string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
-                try
-                {
-                    double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+                Byte[] outputBuffer = new Byte[65];
+                Byte[] inputBuffer = new Byte[65];
+                Byte[] doubleBuffer = new Byte[6];
 
-                    return f;
+                outputBuffer[0] = 0;
+                outputBuffer[1] = 0x03;
+                outputBuffer[2] = 0x13;
+
+                bool success;
+                success = writeRawReportToDevice(outputBuffer);
+
+                if (success)
+                {
+                    // Perform the read
+                    success = readSingleReportFromDevice(ref inputBuffer);
+                    doubleBuffer[0] = inputBuffer[1];
+                    doubleBuffer[1] = inputBuffer[2];
+                    doubleBuffer[2] = inputBuffer[3];
+                    doubleBuffer[3] = inputBuffer[4];
+                    doubleBuffer[4] = inputBuffer[5];
+                    doubleBuffer[5] = inputBuffer[6];
+                    string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
+                    try
+                    {
+                        double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        return f;
+                    }
+                    catch { Debug.WriteLine(s); return 0; }
                 }
-                catch { Debug.WriteLine(s); return 0; }
+                else
+                {
+                    return 0;
+                }
             }
-            else
+            catch
             {
                 return 0;
             }
@@ -711,35 +734,43 @@ namespace Soldering_Robot_USB_Config
 
         public double getSolderingIron2TargetTemperature() // gets whether the soldering iron 1 element is switched on
         {
-            Byte[] outputBuffer = new Byte[65];
-            Byte[] inputBuffer = new Byte[65];
-            Byte[] doubleBuffer = new Byte[6];
-
-            outputBuffer[0] = 0;
-            outputBuffer[1] = 0x03;
-            outputBuffer[2] = 0x14;
-
-            bool success;
-            success = writeRawReportToDevice(outputBuffer);
-
-            if (success)
+            try
             {
-                // Perform the read
-                success = readSingleReportFromDevice(ref inputBuffer);
-                doubleBuffer[0] = inputBuffer[1];
-                doubleBuffer[1] = inputBuffer[2];
-                doubleBuffer[2] = inputBuffer[3];
-                doubleBuffer[3] = inputBuffer[4];
-                doubleBuffer[4] = inputBuffer[5];
-                doubleBuffer[5] = inputBuffer[6];
-                string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
-                double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
-                return f;
+                Byte[] outputBuffer = new Byte[65];
+                Byte[] inputBuffer = new Byte[65];
+                Byte[] doubleBuffer = new Byte[6];
+
+                outputBuffer[0] = 0;
+                outputBuffer[1] = 0x03;
+                outputBuffer[2] = 0x14;
+
+                bool success;
+                success = writeRawReportToDevice(outputBuffer);
+
+                if (success)
+                {
+                    // Perform the read
+                    success = readSingleReportFromDevice(ref inputBuffer);
+                    doubleBuffer[0] = inputBuffer[1];
+                    doubleBuffer[1] = inputBuffer[2];
+                    doubleBuffer[2] = inputBuffer[3];
+                    doubleBuffer[3] = inputBuffer[4];
+                    doubleBuffer[4] = inputBuffer[5];
+                    doubleBuffer[5] = inputBuffer[6];
+                    string s = Encoding.UTF8.GetString(doubleBuffer, 0, doubleBuffer.Length);
+                    double f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+                    return f;
+                }
+                else
+                {
+                    return 0;
+                }
             }
-            else
+            catch
             {
                 return 0;
             }
+
 
         }
 
@@ -791,9 +822,192 @@ namespace Soldering_Robot_USB_Config
 
         #endregion
 
+        public SolderingStationObject getSolderingGlobalStatus() {
+            SolderingStationObject tmpObj = new SolderingStationObject();
+
+            tmpObj.success = true;
+
+            try
+            {
+                Byte[] outputBuffer = new Byte[65];
+                Byte[] inputBuffer = new Byte[65];
+
+                string s = "";
+                double f = 0;
+
+                outputBuffer[0] = 0;
+                outputBuffer[1] = 0x03;
+                outputBuffer[2] = 0x20;
+
+                bool success;
+                success = writeRawReportToDevice(outputBuffer);
+
+                if (success)
+                {
+                    // Perform the read
+                    success = readSingleReportFromDevice(ref inputBuffer);
+
+
+                    if (inputBuffer[3] == '1')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron1_Running = true;
+                    }
+                    if (inputBuffer[3] == '0')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron1_Running = false;
+                    }
+                    if (inputBuffer[5] == '1')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron2_Running = true;
+                    }
+                    if (inputBuffer[5] == '0')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron2_Running = false;
+                    }
+
+                    try
+                    {
+
+                        Byte[] SolderingIron1Temperature = new Byte[6];
+
+                        SolderingIron1Temperature[0] = inputBuffer[7];
+                        SolderingIron1Temperature[1] = inputBuffer[8];
+                        SolderingIron1Temperature[2] = inputBuffer[9];
+                        SolderingIron1Temperature[3] = inputBuffer[10];
+                        SolderingIron1Temperature[4] = inputBuffer[11];
+                        SolderingIron1Temperature[5] = inputBuffer[12];
+
+                        s = Encoding.UTF8.GetString(SolderingIron1Temperature, 0, 6);
+                        f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        tmpObj.Iron1_Temperature = f;
+                    }
+                    catch
+                    {
+                        tmpObj.Iron1_Temperature = 666;
+                        tmpObj.success = false;
+                    }
+
+                    try
+                    {
+                        Byte[] SolderingIron2Temperature = new Byte[6];
+
+                        SolderingIron2Temperature[0] = inputBuffer[14];
+                        SolderingIron2Temperature[1] = inputBuffer[15];
+                        SolderingIron2Temperature[2] = inputBuffer[16];
+                        SolderingIron2Temperature[3] = inputBuffer[17];
+                        SolderingIron2Temperature[4] = inputBuffer[18];
+                        SolderingIron2Temperature[5] = inputBuffer[19];
+
+                        s = Encoding.UTF8.GetString(SolderingIron2Temperature, 0, 6);
+                        f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        tmpObj.Iron2_Temperature = f;
+                    }
+                    catch
+                    {
+                        tmpObj.Iron2_Temperature = 777;
+                        tmpObj.success = false;
+                    }
+
+                    try
+                    {
+
+                        Byte[] SolderingIron1TargetTemperature = new Byte[6];
+
+                        SolderingIron1TargetTemperature[0] = inputBuffer[21];
+                        SolderingIron1TargetTemperature[1] = inputBuffer[22];
+                        SolderingIron1TargetTemperature[2] = inputBuffer[23];
+                        SolderingIron1TargetTemperature[3] = inputBuffer[24];
+                        SolderingIron1TargetTemperature[4] = inputBuffer[25];
+                        SolderingIron1TargetTemperature[5] = inputBuffer[26];
+
+                        s = Encoding.UTF8.GetString(SolderingIron1TargetTemperature, 0, 6);
+                        f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        tmpObj.Iron1_Target_Temperature = f;
+                    }
+                    catch
+                    {
+                        tmpObj.Iron1_Target_Temperature = 888;
+                        tmpObj.success = false;
+                    }
+
+                    try
+                    {
+
+                        Byte[] SolderingIron2TargetTemperature = new Byte[6];
+
+                        SolderingIron2TargetTemperature[0] = inputBuffer[28];
+                        SolderingIron2TargetTemperature[1] = inputBuffer[29];
+                        SolderingIron2TargetTemperature[2] = inputBuffer[30];
+                        SolderingIron2TargetTemperature[3] = inputBuffer[31];
+                        SolderingIron2TargetTemperature[4] = inputBuffer[32];
+                        SolderingIron2TargetTemperature[5] = inputBuffer[33];
+
+                        s = Encoding.UTF8.GetString(SolderingIron2TargetTemperature, 0, 6);
+                        f = double.Parse(s, System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
+
+                        tmpObj.Iron2_Target_Temperature = f;
+
+                    }
+                    catch
+                    {
+                        tmpObj.Iron2_Target_Temperature = 999;
+                        tmpObj.success = false;
+                    }
+
+                    if (inputBuffer[35] == '1')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron1_Activate = true;
+                    }
+                    if (inputBuffer[35] == '0')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron1_Activate = false;
+                    }
+                    if (inputBuffer[36] == '1')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron2_Activate = true;
+                    }
+                    if (inputBuffer[36] == '0')
+                    { // Iron 1 is switched on
+                        tmpObj.Iron2_Activate = false;
+                    }
+
+                }
+                else
+                {
+                    tmpObj.Iron1_Activate = false;
+                    tmpObj.Iron2_Activate = false;
+                    tmpObj.Iron1_Running = false;
+                    tmpObj.Iron2_Running = false;
+                    tmpObj.Iron1_Temperature = 0;
+                    tmpObj.Iron2_Temperature = 0;
+                    tmpObj.Iron1_Target_Temperature = 0;
+                    tmpObj.Iron2_Target_Temperature = 0;
+                    tmpObj.success = false;
+                }
+            }
+            catch
+            {
+                tmpObj.Iron1_Activate = false;
+                tmpObj.Iron2_Activate = false;
+                tmpObj.Iron1_Running = false;
+                tmpObj.Iron2_Running = false;
+                tmpObj.Iron1_Temperature = 0;
+                tmpObj.Iron2_Temperature = 0;
+                tmpObj.Iron1_Target_Temperature = 0;
+                tmpObj.Iron2_Target_Temperature = 0;
+                tmpObj.success = false;
+            }
+            
+
+            return tmpObj;
+        }
+
         // Collect debug information from the device
         public String collectDebug()
-            {
+        {
             // Collect debug information from USB device
             Debug.WriteLine("Reference Application -> Collecting debug information from device");
 
@@ -822,6 +1036,22 @@ namespace Soldering_Robot_USB_Config
             string s = System.Text.ASCIIEncoding.ASCII.GetString(inputBuffer, 2, inputBuffer[1]);
 
             return s;
-            }
         }
     }
+
+    public class SolderingStationObject
+    {
+       // Format G[Iron1 Status, 1 byte],[Iron2 Status, 1 byte],[Iron1 Temperature, 6 bytes],[Iron2 Temperature, 6 bytes],
+     // [Iron1 Taget Temperature, 6 bytes],[Iron2 Target Temperature, 6 bytes], [Iron1 Activate status][Iron2 Activate status]  example G,1,1,253.22,433.22/n
+        public bool Iron1_Running { get; set; }
+        public bool Iron2_Running { get; set; }
+        public double Iron1_Temperature { get; set; }
+        public double Iron2_Temperature { get; set; }
+        public double Iron1_Target_Temperature { get; set; }
+        public double Iron2_Target_Temperature { get; set; }
+        public bool Iron1_Activate { get; set; }
+        public bool Iron2_Activate { get; set; }
+        public bool success { get; set; }
+    }
+}
+
